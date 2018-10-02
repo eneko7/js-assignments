@@ -240,22 +240,11 @@ export function getRectangleString(width, height) {
  *
  */
 export function encodeToRot13(str) {
-  /* implement your code here */
-  let res_str = '';
-  for (let i = 0; i < str.length; i++) {
-    if(str.charCodeAt(i) >= 65 && str.charCodeAt(i) <= 77){
-      res_str += String.fromCharCode(str.charCodeAt(i) + 13);
-    } else if (str.charCodeAt(i) >= 78 && str.charCodeAt(i) <= 90) {
-      res_str += String.fromCharCode(str.charCodeAt(i) - 13);
-    } else if(str.charCodeAt(i) >= 97 && str.charCodeAt(i) <= 109){
-      res_str += String.fromCharCode(str.charCodeAt(i) + 13);
-    } else if (str.charCodeAt(i) >= 110 && str.charCodeAt(i) <= 122) {
-      res_str += String.fromCharCode(str.charCodeAt(i) - 13);
-    } else {
-      res_str += str[i];
-    }
-  }
-  return res_str;
+  return str.replace( /[A-Za-z]/g, char => {
+    return String.fromCharCode(char.charCodeAt(0) + (char.toUpperCase() < 'N'
+      ? 13
+      : -13));
+  });
 }
 
 /**
