@@ -76,7 +76,7 @@ export function getAverage(value1, value2) {
  */
 export function getDistanceBetweenPoints(x1, y1, x2, y2) {
   /* implement your code here */
-  return Math.hypot(Math.abs(x1)+Math.abs(x2), Math.abs(y1)+Math.abs(y2));
+  return Math.hypot(x2 - x1, y2 - y1);
 }
 
 /**
