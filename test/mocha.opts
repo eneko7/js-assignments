@@ -1,2 +1,2 @@
 --colors
---require babel-core/register
+--require ./test/setup
