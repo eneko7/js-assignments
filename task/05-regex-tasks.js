@@ -29,8 +29,7 @@
  *
  * @return {RegExp}
  */
-export function getRegexForGuid() {
-  /* implement your code here */
+function getRegexForGuid() {
   return /{[A-F0-9]{8}-([A-F0-9]{4}-){3}[a-fA-F0-9]{12}}/i;
 }
 
@@ -52,8 +51,7 @@ export function getRegexForGuid() {
  * @return {RegExp}
  *
  */
-export function getRegexForPitSpot() {
-  /* implement your code here */
+function getRegexForPitSpot() {
   return /p.t/;
 }
 
@@ -72,9 +70,8 @@ export function getRegexForPitSpot() {
  *
  * @return {RegExp}
  */
-export function getRegexForIPv4() {
-  /* implement your code here */
-  return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+function getRegexForIPv4() {
+  return /((^[0-2]\d\d)|(^\d\d?))((\.\d\d?)|(\.[0-2]\d\d)){3}$/;
 }
 
 
@@ -92,8 +89,7 @@ export function getRegexForIPv4() {
  *                                   '0S4-H1-HACK'
  * @return {RegExp}
  */
-export function getRegexForSSN() {
-  /* implement your code here */
+function getRegexForSSN() {
   return /([0-9][1-9][0-9]-[0-9][1-9]-[0-9]{3}[1-9])$/;
 }
 
@@ -118,7 +114,15 @@ export function getRegexForSSN() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-export function getPasswordValidator(minLength) {
-  /* implement your code here */
-  return new RegExp(`^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{${minLength},}$`);
+function getPasswordValidator(minLength) {
+  const m = minLength;
+  return new RegExp(`^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{${m},}$`);
 }
+
+module.exports = {
+  getRegexForGuid: getRegexForGuid,
+  getRegexForPitSpot: getRegexForPitSpot,
+  getRegexForIPv4: getRegexForIPv4,
+  getRegexForSSN: getRegexForSSN,
+  getPasswordValidator: getPasswordValidator
+};

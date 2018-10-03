@@ -19,8 +19,8 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-export function concatenateStrings(value1, value2) {
-  /* implement your code here */
+
+function concatenateStrings(value1, value2) {
   return value1+value2;
 }
 
@@ -35,8 +35,7 @@ export function concatenateStrings(value1, value2) {
  *   'b'     => 1
  *   ''      => 0
  */
-export function getStringLength(value) {
-  /* implement your code here */
+function getStringLength(value) {
   return value.length;
 }
 
@@ -53,8 +52,7 @@ export function getStringLength(value) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-export function getStringFromTemplate(firstName, lastName) {
-  /* implement your code here */
+function getStringFromTemplate(firstName, lastName) {
   return `Hello, ${firstName} ${lastName}!`;
 }
 
@@ -68,8 +66,7 @@ export function getStringFromTemplate(firstName, lastName) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-export function  extractNameFromTemplate(value) {
-  /* implement your code here */
+function  extractNameFromTemplate(value) {
   return value.slice(7, -1);
 }
 
@@ -84,7 +81,7 @@ export function  extractNameFromTemplate(value) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-export function getFirstChar(value) {
+function getFirstChar(value) {
   return value[0];
 }
 
@@ -99,7 +96,7 @@ export function getFirstChar(value) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-export function removeLeadingAndTrailingWhitespaces(value) {
+function removeLeadingAndTrailingWhitespaces(value) {
   return value.trim();
 }
 
@@ -114,8 +111,7 @@ export function removeLeadingAndTrailingWhitespaces(value) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-export function repeatString(value, count) {
-  /* implement your code here */
+function repeatString(value, count) {
   return value.repeat(count);
 }
 
@@ -131,8 +127,7 @@ export function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-export function removeFirstOccurrences(str, value)  {
-  /* implement your code here */
+function removeFirstOccurrences(str, value)  {
   return str.replace(value, '');
 }
 
@@ -147,8 +142,7 @@ export function removeFirstOccurrences(str, value)  {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-export function unbracketTag(str) {
-  /* implement your code here */
+function unbracketTag(str) {
   return str.slice(1, -1);
 }
 
@@ -163,8 +157,7 @@ export function unbracketTag(str) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-export function convertToUpperCase(str) {
-  /* implement your code here */
+function convertToUpperCase(str) {
   return str.toUpperCase();
 }
 
@@ -179,8 +172,7 @@ export function convertToUpperCase(str) {
  *     ['angus.young@gmail.com', 'brian.johnson@hotmail.com', 'bon.scott@yahoo.com']
  *   'info@gmail.com' => ['info@gmail.com']
  */
-export function extractEmails(str) {
-  /* implement your code here */
+function extractEmails(str) {
   return str.split(';');
 }
 
@@ -207,21 +199,11 @@ export function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-export function getRectangleString(width, height) {
-  /* implement your code here */
-  let first_line = '', last_line = '', middle_line = '';
-
-  first_line = '┌' + '─'.repeat(width - 2) + '┐\n';
-  last_line = '└' + '─'.repeat(width - 2) + '┘\n';
-  
-  if (height > 2) {
-    middle_line = '│'+' '.repeat(width-2)+'│\n'; 
-    middle_line = middle_line.repeat(height-2);
-  }
-  
-  return first_line+middle_line+last_line;
+function getRectangleString(width, height) {
+  return '┌' + '─'.repeat(width - 2) + '┐\n'
+      + ('│' + ' '.repeat(width - 2) + '│\n').repeat(height - 2)
+      + '└' + '─'.repeat(width-2) + '┘\n';
 }
-
 
 /**
  * Encode specified string with ROT13 cipher
@@ -239,7 +221,7 @@ export function getRectangleString(width, height) {
  *          'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-export function encodeToRot13(str) {
+function encodeToRot13(str) {
   return str.replace( /[A-Za-z]/g, char => {
     return String.fromCharCode(char.charCodeAt(0) + (char.toUpperCase() < 'N'
       ? 13
@@ -260,14 +242,8 @@ export function encodeToRot13(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-export function isString(value) {
-  /* implement your code here */
-  if (typeof(value) === 'string') {
-    return true;
-  } else if(value instanceof String) {
-    return true;
-  }
-  return false;
+function isString(value) {
+  return typeof(value) === 'string' || value instanceof String ? true : false;
 }
 
 
@@ -295,8 +271,26 @@ export function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-export function getCardId(value) {
-  let mast = '♣♦♥♠'.indexOf(value.slice(-1)) * 13;
-  let card_pos = 'A,2,3,4,5,6,7,8,9,10,J,Q,K'.split(',').indexOf(value.slice(0, -1));
-  return mast + card_pos;
+function getCardId(value) {
+  const mast = '♣♦♥♠'.indexOf(value.slice(-1)) * 13;
+  const card_pos = 'A,2,3,4,5,6,7,8,9,10,J,Q,K'.split(',');
+  return mast + card_pos.indexOf(value.slice(0, -1));
 }
+
+module.exports = {
+  concatenateStrings: concatenateStrings,
+  getStringLength: getStringLength,
+  getStringFromTemplate: getStringFromTemplate,
+  extractNameFromTemplate: extractNameFromTemplate,
+  getFirstChar: getFirstChar,
+  removeLeadingAndTrailingWhitespaces: removeLeadingAndTrailingWhitespaces,
+  repeatString: repeatString,
+  removeFirstOccurrences: removeFirstOccurrences,
+  unbracketTag: unbracketTag,
+  convertToUpperCase: convertToUpperCase,
+  extractEmails: extractEmails,
+  getRectangleString: getRectangleString,
+  encodeToRot13: encodeToRot13,
+  isString: isString,
+  getCardId: getCardId
+};

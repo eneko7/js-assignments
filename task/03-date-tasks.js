@@ -20,8 +20,7 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-export function parseDataFromRfc2822(value) {
-  /* implement your code here */
+function parseDataFromRfc2822(value) {
   return new Date(value);
 }
 
@@ -36,8 +35,7 @@ export function parseDataFromRfc2822(value) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-export function parseDataFromIso8601(value) {
-  /* implement your code here */
+function parseDataFromIso8601(value) {
   return new Date(value);
 }
 
@@ -56,17 +54,9 @@ export function parseDataFromIso8601(value) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-export function isLeapYear(date) {
-  /* implement your code here */
-  if (date.getFullYear()%4 !== 0 ) {
-    return false;
-  } else if (date.getFullYear()%100 !== 0) {
-    return true;
-  } else if (date.getFullYear()%400 !== 0) {
-    return false;
-  } else {
-    return true;
-  }
+function isLeapYear(date) {
+  const year = date.getFullYear();
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
 
 
@@ -85,22 +75,9 @@ export function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-export function timeSpanToString(startDate, endDate) {
-  /* implement your code here */
-  let time = endDate - startDate;
-  let milisec = time%1000;
-  time = time - milisec; 
-  let seconds = (time/1000)%60;
-  time = time - seconds*1000;
-  let minutes = (time/1000/60)%60;
-  time = time - minutes*1000*60;
-  let hours = (time/1000/60/60)%60;
-  Number.prototype.pad = function(size) {
-    var s = String(this);
-    while (s.length < (size || 2)) {s = '0' + s;}
-    return s;
-  };
-  return `${hours.pad(2)}:${minutes.pad(2)}:${seconds.pad(2)}.${milisec.pad(3)}`;
+function timeSpanToString(startDate, endDate) {
+  const divDateString = new Date(endDate - startDate).toISOString();
+  return divDateString.slice(11, -1);
 }
 
 
@@ -118,13 +95,20 @@ export function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-export function angleBetweenClockHands(date) {
-  /* implement your code here */
-  let hours = date.getUTCHours() % 12;
-  let minutes = date.getUTCMinutes();
-  let angle_h = 0.5*(60*hours + minutes);
-  let angle_m = 6 * minutes;
-  let angleDiv = Math.abs(angle_h - angle_m);
-  let radians = angleDiv*Math.PI / 180;
+function angleBetweenClockHands(date) {
+  const hours = date.getUTCHours() % 12;
+  const minutes = date.getUTCMinutes();
+  const angle_h = 0.5*(60*hours + minutes);
+  const angle_m = 6 * minutes;
+  const angleDiv = Math.abs(angle_h - angle_m);
+  const radians = angleDiv*Math.PI / 180;
   return angleDiv <= 180 ? radians : radians - Math.PI;
 }
+
+module.exports = {
+  parseDataFromRfc2822: parseDataFromRfc2822,
+  parseDataFromIso8601: parseDataFromIso8601,
+  isLeapYear: isLeapYear,
+  timeSpanToString: timeSpanToString,
+  angleBetweenClockHands: angleBetweenClockHands
+};

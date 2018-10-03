@@ -11,8 +11,7 @@
  *   'zxxlal','laxk'    => 'aklxz'
  *   'abcdefghijklmnop',  'lmnopqrstuvwxyz'  => 'abcdefghijklmnopqrstuvwxyz'
  */
-export function distinctLettersString(value1, value2) {
-  /* implement your code here */
+function distinctLettersString(value1, value2) {
   throw new Error('Not implemented');
 }
 
@@ -29,8 +28,7 @@ export function distinctLettersString(value1, value2) {
  *
  */
 
-export function lowerLetters(value) {
-  /* implement your code here */
+function lowerLetters(value) {
   throw new Error('Not implemented');
 }
 
@@ -52,8 +50,7 @@ export function lowerLetters(value) {
  *    'the quick brown fox'  => 'The Quick Brown Fox'
  */
 
-export function titleCaseConvert(title, minorWords) {
-  /* implement your code here */
+function titleCaseConvert(title, minorWords) {
   throw new Error('Not implemented');
 }
 
@@ -74,7 +71,13 @@ export function titleCaseConvert(title, minorWords) {
  *  '5 1 2 + 4 * + 3 -'  =>  14   // 5 + ((1 + 2) * 4) -3
  */
 
-export function calcRPN(expr) {
-  /* implement your code here */
+function calcRPN(expr) {
   throw new Error('Not implemented');
 }
+
+module.exports = {
+  distinctLettersString,
+  lowerLetters,
+  titleCaseConvert,
+  calcRPN
+};

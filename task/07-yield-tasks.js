@@ -31,11 +31,11 @@
  * @return {Iterable.<string>}
  *
  */
-export function* get99BottlesOfBeer() {
-  let bottles = 99;
-  let stage = 1;
-  let str = '';
-  let loop = true;
+function* get99BottlesOfBeer() {
+  let bottles = 99, stage = 1, str = '', loop = true;
+  const no_more='No more bottles of beer on the wall, no more bottles of beer.';
+  const go='Go to the store and buy some more, 99 bottles of beer on the wall.';
+  const take='Take one down and pass it around, ';
   while(loop){
     switch(bottles){
     case 1: str = '1 bottle '; break;
@@ -43,15 +43,14 @@ export function* get99BottlesOfBeer() {
     case -1: loop = false; break;
     default: str = bottles + ' bottles ';
     }
-
     if(stage === 1){
       stage = 2;
       bottles--;
-      yield bottles === -1?'No more bottles of beer on the wall, no more bottles of beer.':str + 'of beer on the wall, ' + str + 'of beer.';
+      yield bottles===-1?no_more:str + 'of beer on the wall, ' +str+'of beer.';
     }
     else{
       stage = 1;
-      yield bottles === -1?'Go to the store and buy some more, 99 bottles of beer on the wall.':'Take one down and pass it around, ' + str + 'of beer on the wall.';
+      yield bottles===-1 ? go:take + str + 'of beer on the wall.';
     }
   }
 }
@@ -66,11 +65,11 @@ export function* get99BottlesOfBeer() {
  * @return {Iterable.<number>}
  *
  */
-export function* getFibonacciSequence() {
+function* getFibonacciSequence() {
   let fn1 = 0;
   let fn2 = 1;
   while (true){  
-    let current = fn1;
+    const current = fn1;
     fn1 = fn2;
     fn2 = fn2 + current;
     yield current;
@@ -108,11 +107,10 @@ export function* getFibonacciSequence() {
  *  depthTraversalTree(node1) => node1, node2, node3, node4, node5, node6, node7, node8
  *
  */
-export function* depthTraversalTree(root) {
-  let nodes = new Array();
+function* depthTraversalTree(root) {
+  const nodes = new Array();
   let node = root;
   let crutch = true;
-  
   while(crutch){
     if(node.children){
       for(let i = node.children.length - 1; i >= 0; i--){
@@ -147,12 +145,12 @@ export function* depthTraversalTree(root) {
  *           8
  *
  */
-export function* breadthTraversalTree(root) {
-  let nodes = [root];
+function* breadthTraversalTree(root) {
+  const nodes = [root];
   let crutch = true;
   let index = 0;
   while(crutch){
-    let node = nodes[index];
+    const node = nodes[index];
     index++;
     if(node.children){
       for(let i = 0; i < node.children.length; i++){
@@ -178,9 +176,9 @@ export function* breadthTraversalTree(root) {
  *   [ 0 ], [ 2, 4, 6, ... ]  => [ 0, 2, 4, 6, ... ]
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
-export function* mergeSortedSequences(source1, source2) {
-  let q1 = source1();
-  let q2 = source2();
+function* mergeSortedSequences(source1, source2) {
+  const q1 = source1();
+  const q2 = source2();
   let value1 = q1.next();
   let value2 = q2.next();
   while(!value1.done||!value2.done){
@@ -194,3 +192,10 @@ export function* mergeSortedSequences(source1, source2) {
     }
   }
 }
+module.exports = {
+  get99BottlesOfBeer: get99BottlesOfBeer,
+  getFibonacciSequence: getFibonacciSequence,
+  depthTraversalTree: depthTraversalTree,
+  breadthTraversalTree: breadthTraversalTree,
+  mergeSortedSequences: mergeSortedSequences
+};

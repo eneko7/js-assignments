@@ -24,7 +24,7 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.acos(x))
  *
  */
-export function getComposition(f, g) {
+function getComposition(f, g) {
   return x => f(g(x));
 }
 
@@ -45,11 +45,8 @@ export function getComposition(f, g) {
  *   power05(16) => 4
  *
  */
-export function getPowerFunction(exponent) {
-  /* implement your code here */
-  return function (x) {
-    return Math.pow(x, exponent);
-  };
+function getPowerFunction(exponent) {
+  return x => Math.pow(x, exponent);
 }
 
 
@@ -66,9 +63,8 @@ export function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-export function getPolynom() {
-  /* implement your code here */
-  let args = Array.from(arguments);
+function getPolynom() {
+  const args = Array.from(arguments);
   return function(x) {
     let res = null;
     for (let i = 0; i < args.length; i++) {
@@ -93,7 +89,7 @@ export function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-export function memoize(func) {
+function memoize(func) {
   let cache = null;
   cache = cache === null ? func() : cache;
   return () => cache;
@@ -115,7 +111,7 @@ export function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-export function retry(func, attempts) {
+function retry(func, attempts) {
   return () => {
     for (let i = 0; i <= attempts; i++) {
       try {
@@ -152,11 +148,11 @@ export function retry(func, attempts) {
  * cos(3.141592653589793) ends
  *
  */
-export function logger(func, logFunc) {
+function logger(func, logFunc) {
   return function(){
-    let args = Array.from(arguments);
+    const args = Array.from(arguments);
     logFunc(`${func.name}(${JSON.stringify(args).slice(1, -1)}) starts`);
-    let res = func.apply(null, args);
+    const res = func.apply(null, args);
     logFunc(`${func.name}(${JSON.stringify(args).slice(1, -1)}) ends`);
     return res;
   };
@@ -176,7 +172,7 @@ export function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-export function partialUsingArguments(fn, ...args1) {
+function partialUsingArguments(fn, ...args1) {
   return (...args2) => fn(...args1, ...args2);
 }
 
@@ -198,6 +194,17 @@ export function partialUsingArguments(fn, ...args1) {
  *   getId4() => 7
  *   getId10() => 11
  */
-export function getIdGeneratorFunction(startFrom) {
+function getIdGeneratorFunction(startFrom) {
   return () => startFrom++;
 }
+
+module.exports = {
+  getComposition: getComposition,
+  getPowerFunction: getPowerFunction,
+  getPolynom: getPolynom,
+  memoize: memoize,
+  retry: retry,
+  logger: logger,
+  partialUsingArguments: partialUsingArguments,
+  getIdGeneratorFunction: getIdGeneratorFunction
+};
