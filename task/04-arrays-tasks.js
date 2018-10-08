@@ -422,8 +422,7 @@ function toStringList(arr) {
  */
 function sortCitiesArray(arr) {
   return arr.sort((a, b) => {
-    return (a.country > b.country) - (a.country < b.country)
-      || (a.city > b.city) - (a.city < b.city);
+    return a.country.localeCompare(b.country) || a.city.localeCompare(b.city);
   });
 }
 /**
