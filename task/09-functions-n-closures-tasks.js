@@ -118,7 +118,6 @@ function retry(func, attempts) {
         return func();
       } catch(err) {
         if (i === attempts) throw err;
-        continue;
       }
     }
   };

@@ -421,27 +421,11 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-  return arr.sort(compare);
+  return arr.sort((a, b) => {
+    return (a.country > b.country) - (a.country < b.country)
+      || (a.city > b.city) - (a.city < b.city);
+  });
 }
-function compare(a, b) {
-  if (a.country < b.country) {
-    return -1;
-  }
-  if (a.country > b.country) {
-    return 1;
-  }
-  if(a.country === b.country) {
-    if (a.city < b.city) {
-      return -1;
-    }
-    if (a.city > b.city) {
-      return 1;
-    }
-    return 0;
-  }
-  return 0;
-}
-
 /**
  * Creates an indentity matrix of the specified size
  *
@@ -530,14 +514,12 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-  const arr = array.reduce((acc, el, i) => {
+  return new Map (Object.entries(array.reduce((acc, el, i) => {
     const key = keySelector(el);
     const value = valueSelector(el);
     acc[key] = acc[key] ? [...acc[key], value] : [value];
     return acc;
-  }, {});
-
-  return new Map(Object.entries(arr));
+  }, {})));
 }
 
 

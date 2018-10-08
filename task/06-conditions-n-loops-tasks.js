@@ -29,14 +29,10 @@
  *
  */
 function getFizzBuzz(num) {
-  if (num%3 === 0 && num%5 !== 0) {
-    return 'Fizz';
-  } else if (num%3 !== 0 && num%5 === 0) {
-    return 'Buzz';
-  } else if (num%3 === 0 && num%5 === 0) {
-    return 'FizzBuzz';
-  }
-  return num;
+  return num%15 === 0 && 'FizzBuzz'
+		|| num%5 === 0 && 'Buzz'
+		|| num%3 === 0 && 'Fizz'
+		|| num;
 }
 
 
@@ -93,7 +89,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-  return ((a + b) > c) && ((b + c) > a) && ((a + c) > b) ? true : false;
+  return ((a + b) > c) && ((b + c) > a) && ((a + c) > b);
 }
 
 
